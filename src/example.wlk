@@ -1,3 +1,7 @@
+class Entrenador{
+	var property pokemones()
+}
+
 class Pokemon{
 	var vida
 	var ataques = []
@@ -33,6 +37,9 @@ class Pokemon{
 	}
 	method poder(){
 		return poder
+	}
+	method ataques(){
+		return ataques
 	}
 }
 
@@ -108,5 +115,32 @@ object placaje{
 	}
 	method danio(pokemon){
 		return pokemon.poder() 
+	}
+}
+
+object pelea{
+	var pokemones1
+	var pokemones2  
+	method pelear(entrenador1, entrenador2){
+		pokemones1 = entrenador1.pokemones()
+		pokemones2 = entrenador2.pokemones()
+		self.lucha(pokemones1.first(), pokemones2.first())
+	}
+	method lucha(pokemon1, pokemon2){
+		if(pokemon1.vida()>0){
+		self.atacar(pokemon1, pokemon2)
+		}
+		else {
+			pokemones1.remove(pokemon1)
+			self.lucha(self.swap(pokemones1),pokemon2)
+			}
+		self.lucha(pokemon2,pokemon1)
+	}
+	method atacar(pokemon1, pokemon2){
+		pokemon1.atacar(pokemon2, pokemon1.ataques().anyOne())
+		}
+
+	method swap(pokemones){
+		return pokemones.anyOne()
 	}
 }
